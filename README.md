@@ -41,7 +41,7 @@ ejecutado segun la parametrización de los requerimientos de la app, de acuerdo 
 
 
 > [!IMPORTANT]
-> Estado del proyecto
+> Avance del proyecto
 
 ## Estado:
 - Completado
