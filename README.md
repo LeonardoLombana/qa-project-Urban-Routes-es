@@ -1,7 +1,7 @@
 ﻿# Proyecto de automatización Web Urban Routes
 > [!NOTE]
 > Este aplicativo esta hecho para uso libre, acontinuación su función:
-
+>
 ## Descripción
 Este proyecto automatiza las pruebas para la reserva de un vehiculo y adición de items en el servicio de transporte de la aplicación Urban Routes, 
 ejecutado segun la parametrización de los requerimientos de la app, de acuerdo a la información de la prueba se debe ejecutar lo siguiente:
@@ -14,8 +14,8 @@ ejecutado segun la parametrización de los requerimientos de la app, de acuerdo 
 6. Pedir una manta y pañuelos.
 7. Pedir 2 helados.
 8. Aparece el modal para buscar un taxi.
-
-
+>
+>
 > [!TIP]
 > Estos son los requisitos para poder ejecutar la app
 
