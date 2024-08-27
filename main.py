@@ -209,7 +209,7 @@ class UrbanRoutesPage:
     def get_validar_opcion_m_y_p_esta_seleccionado(self):
         presionarOpcion = (WebDriverWait(self.driver, 10)
                            .until(e_c.presence_of_element_located((By.XPATH,
-                                                                    "//div[@class='r-sw-container']/*[contains(text(),'Manta')]/..//div[@class='switch']//input[@class='switch-input']"))))
+                                                                   "//div[@class='r-sw-container']/*[contains(text(),'Manta')]/..//div[@class='switch']//input[@class='switch-input']"))))
         return presionarOpcion.is_selected()
 
     def set_adicionar_helado(self):
@@ -228,14 +228,14 @@ class UrbanRoutesPage:
         solicitarTaxi.click()
 
     def get_validar_pop_up_solicitud_realizada(self):
-        popUp_solicitud = (WebDriverWait(self.driver, 10)
+        popUp_solicitud = (WebDriverWait(self.driver, 20)
                            .until(e_c.presence_of_element_located(self.pop_up_solicitud_realizada)))
         return popUp_solicitud.text
 
     def set_espera_confirmacion(self):
         ventana_emergente = (WebDriverWait(self.driver, 40)
-                             .until(e_c.presence_of_element_located(self.pop_up_solicitud_realizada),
-                                    'El conductor llegará en'))
+                             .until(e_c.text_to_be_present_in_element(self.pop_up_solicitud_realizada,
+                                    'El conductor llegará en')))
 
     def get_validar_datos_conductor(self):
         dato_conductor = (WebDriverWait(self.driver, 60)
@@ -296,7 +296,25 @@ class TestUrbanRoutes:
         routes_page.set_adicionar_mensaje(mensajeConductor)
         assert routes_page.get_validar_mensaje_conductor() == mensajeConductor
 
-  
+    def test_opcion_manta_y_panuelos(self):
+        routes_page = UrbanRoutesPage(self.driver)
+        routes_page.set_clic_manta_y_panuelo()
+        assert routes_page.get_validar_opcion_m_y_p_esta_seleccionado() == True
+
+    def test_adicionar_dos_helados(self):
+        routes_page = UrbanRoutesPage(self.driver)
+        routes_page.set_adicionar_helado()
+        assert routes_page.get_conseguir_total_helados() == '2'
+
+    def test_pop_up_confirmacion_solicitud_realizada(self):
+        routes_page = UrbanRoutesPage(self.driver)
+        routes_page.set_clic_solicitar_taxi()
+        assert routes_page.get_validar_pop_up_solicitud_realizada() == 'Buscar automóvil'
+
+    def test_pop_up_datos_conductor(self):
+        routes_page = UrbanRoutesPage(self.driver)
+        routes_page.set_espera_confirmacion()
+        assert 'El conductor llegará en' in routes_page.get_validar_datos_conductor()
 
     @classmethod
     def teardown_class(cls):
